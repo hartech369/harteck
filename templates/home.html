@@ -1,0 +1,427 @@
+﻿<!DOCTYPE html>
+{% load static %}
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HARTECK — Ingeniería que impulsa empresas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<div class="noise"></div>
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-follower" id="cursorFollower"></div>
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- Navbar -->
+<header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500" style="background:transparent">
+    <div class="container flex items-center justify-between h-20">
+        <a href="/" class="flex items-center gap-3 group">
+            <div class="w-11 h-11 rounded-xl gradient-bg flex items-center justify-center shadow-lg shadow-blue-500/20 transition-all duration-500 group-hover:shadow-blue-500/40 group-hover:scale-105">
+                <span class="text-white font-extrabold text-xl" style="font-family:'Manrope'">H</span>
+            </div>
+            <span class="text-[var(--white)] font-bold text-xl tracking-tight">HARTECK</span>
+        </a>
+        <nav class="hidden lg:flex items-center gap-10">
+            <a href="#soluciones" class="text-sm text-[var(--body)] hover:text-[var(--white)] transition-colors relative group"><span>Soluciones</span><span class="absolute -bottom-1 left-0 w-0 h-[2px] gradient-bg transition-all duration-300 group-hover:w-full"></span></a>
+            <a href="#industrias" class="text-sm text-[var(--body)] hover:text-[var(--white)] transition-colors relative group"><span>Industrias</span><span class="absolute -bottom-1 left-0 w-0 h-[2px] gradient-bg transition-all duration-300 group-hover:w-full"></span></a>
+            <a href="#metodologia" class="text-sm text-[var(--body)] hover:text-[var(--white)] transition-colors relative group"><span>Metodología</span><span class="absolute -bottom-1 left-0 w-0 h-[2px] gradient-bg transition-all duration-300 group-hover:w-full"></span></a>
+            <a href="#nosotros" class="text-sm text-[var(--body)] hover:text-[var(--white)] transition-colors relative group"><span>Nosotros</span><span class="absolute -bottom-1 left-0 w-0 h-[2px] gradient-bg transition-all duration-300 group-hover:w-full"></span></a>
+        </nav>
+        <a href="#contacto" class="btn-p text-sm !py-3 !px-6">Solicitar Consultoría</a>
+    </div>
+</header>
+
+<!-- Hero -->
+<section class="hero-section">
+    <div class="hero-glow-1"></div>
+    <div class="hero-glow-2"></div>
+    <div class="grid-bg"></div>
+    <div id="three-container"></div>
+    <div class="overlay"></div>
+    <div class="container relative z-10" style="position:relative;z-index:10">
+        <div class="inner">
+            <div class="max-w-5xl">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[var(--border)] bg-[var(--card)]/50 text-xs text-[var(--sec)] mb-8 backdrop-blur-sm reveal" style="transition-delay:0.1s">
+                    <span class="w-2 h-2 rounded-full bg-[var(--success)] animate-pulse"></span>
+                    Ingeniería que impulsa empresas
+                </div>
+                <h1 class="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-[var(--white)] leading-[0.95] tracking-tight mb-8 reveal" style="transition-delay:0.2s">
+                    Transformamos<br>
+                    <span class="gradient-text">empresas</span><br>
+                    <span class="text-[var(--ti)]">con tecnología</span>
+                </h1>
+                <p class="text-lg lg:text-xl text-[var(--sec)] leading-relaxed max-w-2xl mb-12 font-light reveal" style="transition-delay:0.35s">
+                    Diseñamos soluciones que optimizan procesos, impulsan el crecimiento y preparan a las organizaciones para competir en la nueva era digital.
+                </p>
+                <div class="flex flex-wrap gap-4 reveal" style="transition-delay:0.5s">
+                    <a href="#contacto" class="btn-p">Solicitar Consultoría Estratégica <i data-lucide="arrow-right" class="w-5 h-5"></i></a>
+                    <a href="#soluciones" class="btn-s">Explorar Soluciones <i data-lucide="chevron-right" class="w-5 h-5"></i></a>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 mt-20 pt-10 border-t border-[var(--border)] reveal" style="transition-delay:0.65s">
+                <div><div class="counter-n" data-target="50">0</div><div class="text-sm text-[var(--sec)] mt-2 font-light">Proyectos desarrollados</div></div>
+                <div><div class="counter-n" data-target="99">0</div><div class="text-sm text-[var(--sec)] mt-2 font-light">% Clientes satisfechos</div></div>
+                <div><div class="counter-n" data-target="12">0</div><div class="text-sm text-[var(--sec)] mt-2 font-light">Industrias atendidas</div></div>
+                <div><div class="counter-n" data-target="24">0</div><div class="text-sm text-[var(--sec)] mt-2 font-light">/7 Soporte continuo</div></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="tech-strip"></div>
+
+<!-- Bloque 2: No desarrollamos software — con imagen -->
+<section class="py-28 lg:py-36">
+    <div class="container">
+        <div class="grid lg:grid-cols-2 gap-16 items-center">
+            <div class="rl">
+                <div class="section-tag">Posicionamiento</div>
+                <h2 class="text-3xl lg:text-5xl font-extrabold text-[var(--white)] leading-[1.08] mb-8">
+                    No desarrollamos software.<br>
+                    <span class="gradient-text">Construimos ventajas competitivas.</span>
+                </h2>
+                <p class="text-lg text-[var(--sec)] leading-relaxed mb-6">Las empresas ya no necesitan únicamente sistemas. Necesitan tecnología que conecte personas, procesos y datos para crecer con mayor eficiencia.</p>
+                <p class="text-lg text-[var(--sec)] leading-relaxed">En HARTECK transformamos desafíos complejos en soluciones digitales preparadas para el presente y el futuro.</p>
+            </div>
+            <div class="rr">
+                <div class="rounded-3xl overflow-hidden border border-[var(--border)] relative" style="aspect-ratio:4/3">
+                    <img src="{% static 'img/servers.jpg' %}" alt="Centro de datos HARTECK" class="w-full h-full object-cover" loading="lazy">
+                    <div class="absolute inset-0" style="background:linear-gradient(135deg,rgba(11,15,25,0.5),rgba(37,99,235,0.1))"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-8">
+                        <div class="grid grid-cols-3 gap-3">
+                            <div class="text-center p-3 rounded-xl bg-[var(--bg)]/60 backdrop-blur-sm border border-[var(--border)]"><i data-lucide="cpu" class="w-6 h-6 text-[var(--blue)] mx-auto mb-1"></i><span class="text-xs text-[var(--sec)]">Cloud</span></div>
+                            <div class="text-center p-3 rounded-xl bg-[var(--bg)]/60 backdrop-blur-sm border border-[var(--border)]"><i data-lucide="bot" class="w-6 h-6 text-[var(--cyan)] mx-auto mb-1"></i><span class="text-xs text-[var(--sec)]">IA</span></div>
+                            <div class="text-center p-3 rounded-xl bg-[var(--bg)]/60 backdrop-blur-sm border border-[var(--border)]"><i data-lucide="shield" class="w-6 h-6 text-[var(--blue)] mx-auto mb-1"></i><span class="text-xs text-[var(--sec)]">Seguridad</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="tech-strip"></div>
+
+<!-- Bloque 3: Desafíos — con imagen de fondo -->
+<section class="py-28 lg:py-36 relative overflow-hidden">
+    <div class="absolute inset-0 opacity-[0.04]">
+        <img src="{% static 'img/code.jpg' %}" alt="" class="w-full h-full object-cover" loading="lazy">
+    </div>
+    <div class="container relative z-10">
+        <div class="text-center max-w-3xl mx-auto mb-20 reveal">
+            <div class="section-tag justify-center">Desafíos</div>
+            <h2 class="text-3xl lg:text-5xl font-extrabold text-[var(--white)] leading-[1.08] mb-6">
+                Los desafíos de hoy requieren<br><span class="gradient-text">algo más que tecnología</span>
+            </h2>
+        </div>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="card-3d reveal"><div class="card-icon mb-5"><i data-lucide="file-text" class="w-7 h-7"></i></div><div class="shimmer"></div><h3 class="card-title font-semibold text-lg mb-3">Procesos manuales</h3><p class="text-sm text-[var(--sec)] font-light leading-relaxed">Tareas repetitivas que consumen tiempo y recursos valiosos.</p></div>
+            <div class="card-3d reveal"><div class="card-icon mb-5"><i data-lucide="folder-tree" class="w-7 h-7"></i></div><div class="shimmer"></div><h3 class="card-title font-semibold text-lg mb-3">Información dispersa</h3><p class="text-sm text-[var(--sec)] font-light leading-relaxed">Datos fragmentados sin integración ni visibilidad.</p></div>
+            <div class="card-3d reveal"><div class="card-icon mb-5"><i data-lucide="users" class="w-7 h-7"></i></div><div class="shimmer"></div><h3 class="card-title font-semibold text-lg mb-3">Clientes sin seguimiento</h3><p class="text-sm text-[var(--sec)] font-light leading-relaxed">Oportunidades perdidas por falta de automatización.</p></div>
+            <div class="card-3d reveal"><div class="card-icon mb-5"><i data-lucide="plug-zap" class="w-7 h-7"></i></div><div class="shimmer"></div><h3 class="card-title font-semibold text-lg mb-3">Sistemas desconectados</h3><p class="text-sm text-[var(--sec)] font-light leading-relaxed">Plataformas que no se comunican entre sí.</p></div>
+            <div class="card-3d reveal"><div class="card-icon mb-5"><i data-lucide="trending-down" class="w-7 h-7"></i></div><div class="shimmer"></div><h3 class="card-title font-semibold text-lg mb-3">Baja productividad</h3><p class="text-sm text-[var(--sec)] font-light leading-relaxed">Procesos ineficientes que limitan el rendimiento.</p></div>
+            <div class="card-3d reveal"><div class="card-icon mb-5"><i data-lucide="bar-chart-2" class="w-7 h-7"></i></div><div class="shimmer"></div><h3 class="card-title font-semibold text-lg mb-3">Decisiones sin datos</h3><p class="text-sm text-[var(--sec)] font-light leading-relaxed">Falta de analítica para decisiones informadas.</p></div>
+            <div class="card-3d reveal"><div class="card-icon mb-5"><i data-lucide="clock" class="w-7 h-7"></i></div><div class="shimmer"></div><h3 class="card-title font-semibold text-lg mb-3">Procesos lentos</h3><p class="text-sm text-[var(--sec)] font-light leading-relaxed">Flujos que necesitan optimización urgente.</p></div>
+            <div class="card-3d reveal"><div class="card-icon mb-5"><i data-lucide="bot-off" class="w-7 h-7"></i></div><div class="shimmer"></div><h3 class="card-title font-semibold text-lg mb-3">Falta de automatización</h3><p class="text-sm text-[var(--sec)] font-light leading-relaxed">Oportunidades no aprovechadas en la operación.</p></div>
+        </div>
+    </div>
+</section>
+
+<div class="tech-strip"></div>
+
+<!-- Bloque 4: Soluciones — Bento con imágenes -->
+<section id="soluciones" class="py-28 lg:py-36">
+    <div class="container">
+        <div class="text-center max-w-3xl mx-auto mb-20 reveal">
+            <div class="section-tag justify-center">Soluciones</div>
+            <h2 class="text-3xl lg:text-5xl font-extrabold text-[var(--white)] leading-[1.08] mb-6">
+                Una solución para <span class="gradient-text">cada desafío</span>
+            </h2>
+        </div>
+
+        <!-- Bento Grid con imágenes -->
+        <div class="reveal">
+            <div style="display:grid;gap:8px;grid-template-columns:1fr 1fr;grid-auto-rows:auto">
+                <!-- IA - wide -->
+                <div class="bento-item bento-wide" style="grid-column:span 2;min-height:320px">
+                    <img src="{% static 'img/ai-brain.jpg' %}" alt="Inteligencia Artificial" class="bento-img" loading="lazy">
+                    <div class="bento-content">
+                        <span class="text-xs font-bold text-[var(--blue)] mb-1">Inteligencia Artificial</span>
+                        <h3 class="text-2xl font-extrabold text-[var(--white)] mb-2">Automatización inteligente</h3>
+                        <p class="text-sm text-[var(--sec)] max-w-lg">Automatizamos procesos, analizamos información y potenciamos la toma de decisiones mediante IA.</p>
+                    </div>
+                </div>
+                <!-- Software -->
+                <div class="bento-item" style="min-height:280px">
+                    <img src="{% static 'img/code.jpg' %}" alt="Ingeniería de Software" class="bento-img" loading="lazy">
+                    <div class="bento-content">
+                        <span class="text-xs font-bold text-[var(--blue)] mb-1">Software</span>
+                        <h3 class="text-xl font-bold text-[var(--white)]">Ingeniería de Software</h3>
+                        <p class="text-xs text-[var(--sec)]">Plataformas adaptadas a cada organización</p>
+                    </div>
+                </div>
+                <!-- Automatización -->
+                <div class="bento-item" style="min-height:280px">
+                    <img src="{% static 'img/robotics.jpg' %}" alt="Automatización" class="bento-img" loading="lazy">
+                    <div class="bento-content">
+                        <span class="text-xs font-bold text-[var(--cyan)] mb-1">Automatización</span>
+                        <h3 class="text-xl font-bold text-[var(--white)]">Procesos autónomos</h3>
+                        <p class="text-xs text-[var(--sec)]">Eliminamos tareas repetitivas</p>
+                    </div>
+                </div>
+                <!-- Cloud -->
+                <div class="bento-item" style="min-height:280px">
+                    <img src="{% static 'img/cloud.jpg' %}" alt="Cloud Architecture" class="bento-img" loading="lazy">
+                    <div class="bento-content">
+                        <span class="text-xs font-bold text-[var(--blue)] mb-1">Cloud</span>
+                        <h3 class="text-xl font-bold text-[var(--white)]">Infraestructura</h3>
+                        <p class="text-xs text-[var(--sec)]">Arquitecturas modernas y escalables</p>
+                    </div>
+                </div>
+                <!-- Analítica -->
+                <div class="bento-item" style="min-height:280px">
+                    <img src="{% static 'img/analytics.jpg' %}" alt="Analítica de datos" class="bento-img" loading="lazy">
+                    <div class="bento-content">
+                        <span class="text-xs font-bold text-[var(--cyan)] mb-1">Analítica</span>
+                        <h3 class="text-xl font-bold text-[var(--white)]">Datos estratégicos</h3>
+                        <p class="text-xs text-[var(--sec)]">Decisiones basadas en datos</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="tech-strip"></div>
+
+<!-- Bloque 5: Industrias — con imágenes de fondo -->
+<section id="industrias" class="py-28 lg:py-36">
+    <div class="container">
+        <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+            <div class="section-tag justify-center">Industrias</div>
+            <h2 class="text-3xl lg:text-5xl font-extrabold text-[var(--white)] leading-[1.08] mb-6">
+                Expertos en tu <span class="gradient-text">industria</span>
+            </h2>
+        </div>
+
+        <!-- Grid de industrias con imágenes -->
+        <div class="reveal" style="display:grid;gap:8px;grid-template-columns:1fr 1fr;grid-auto-rows:auto">
+            <div class="bento-item" style="grid-column:span 2;min-height:300px">
+                <img src="{% static 'img/analytics.jpg' %}" alt="Industrias" class="bento-img" loading="lazy">
+                <div class="bento-content">
+                    <h3 class="text-2xl font-extrabold text-[var(--white)] mb-4">12 industrias, una visión</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="industry-pill"><i data-lucide="heart-pulse" class="w-4 h-4 text-[var(--blue)]"></i> Salud</span>
+                        <span class="industry-pill"><i data-lucide="graduation-cap" class="w-4 h-4 text-[var(--cyan)]"></i> Educación</span>
+                        <span class="industry-pill"><i data-lucide="truck" class="w-4 h-4 text-[var(--blue)]"></i> Logística</span>
+                        <span class="industry-pill"><i data-lucide="shopping-bag" class="w-4 h-4 text-[var(--cyan)]"></i> Retail</span>
+                        <span class="industry-pill"><i data-lucide="building-2" class="w-4 h-4 text-[var(--blue)]"></i> Construcción</span>
+                        <span class="industry-pill"><i data-lucide="landmark" class="w-4 h-4 text-[var(--cyan)]"></i> Finanzas</span>
+                        <span class="industry-pill"><i data-lucide="building" class="w-4 h-4 text-[var(--blue)]"></i> Gobierno</span>
+                        <span class="industry-pill"><i data-lucide="factory" class="w-4 h-4 text-[var(--cyan)]"></i> Manufactura</span>
+                        <span class="industry-pill"><i data-lucide="hotel" class="w-4 h-4 text-[var(--blue)]"></i> Hotelería</span>
+                        <span class="industry-pill"><i data-lucide="utensils-crossed" class="w-4 h-4 text-[var(--cyan)]"></i> Restauración</span>
+                        <span class="industry-pill"><i data-lucide="briefcase" class="w-4 h-4 text-[var(--blue)]"></i> Servicios</span>
+                        <span class="industry-pill"><i data-lucide="zap" class="w-4 h-4 text-[var(--cyan)]"></i> Energía</span>
+                    </div>
+                </div>
+            </div>
+            <div class="bento-item" style="min-height:260px">
+                <img src="{% static 'img/building.jpg' %}" alt="Corporativo" class="bento-img" loading="lazy">
+                <div class="bento-content">
+                    <span class="text-xs font-bold text-[var(--blue)]">Enterprise</span>
+                    <h3 class="text-lg font-bold text-[var(--white)]">Fortune 500</h3>
+                </div>
+            </div>
+            <div class="bento-item" style="min-height:260px">
+                <img src="{% static 'img/team-tech.jpg' %}" alt="Equipos" class="bento-img" loading="lazy">
+                <div class="bento-content">
+                    <span class="text-xs font-bold text-[var(--cyan)]">Equipos</span>
+                    <h3 class="text-lg font-bold text-[var(--white)]">Talento de élite</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="tech-strip"></div>
+
+<!-- Bloque 6: Metodología — con imagen lateral -->
+<section id="metodologia" class="py-28 lg:py-36">
+    <div class="container">
+        <div class="text-center max-w-3xl mx-auto mb-20 reveal">
+            <div class="section-tag justify-center">Metodología</div>
+            <h2 class="text-3xl lg:text-5xl font-extrabold text-[var(--white)] leading-[1.08] mb-6">
+                Nuestra <span class="gradient-text">metodología</span>
+            </h2>
+            <p class="text-[var(--sec)] text-lg">Un proceso de 8 fases que garantiza resultados medibles en cada etapa.</p>
+        </div>
+        <div class="grid lg:grid-cols-2 gap-16 items-start">
+            <div class="relative">
+                <div class="absolute left-[21px] top-0 bottom-0 w-[2px] bg-gradient-to-b from-[var(--g1)] via-[var(--g2)] to-[var(--g1)] opacity-20"></div>
+                <div class="methodology-step reveal"><div class="dot-outer"><div class="dot-inner"></div></div><span class="num">01</span><h3 class="text-xl font-bold text-[var(--white)] mt-1 mb-2">Descubrimos</h3><p class="text-sm text-[var(--sec)] font-light">Entendemos tu negocio, tus procesos y tus objetivos estratégicos.</p></div>
+                <div class="methodology-step reveal"><div class="dot-outer"><div class="dot-inner"></div></div><span class="num">02</span><h3 class="text-xl font-bold text-[var(--white)] mt-1 mb-2">Analizamos</h3><p class="text-sm text-[var(--sec)] font-light">Identificamos oportunidades de mejora y puntos de apalancamiento tecnológico.</p></div>
+                <div class="methodology-step reveal"><div class="dot-outer"><div class="dot-inner"></div></div><span class="num">03</span><h3 class="text-xl font-bold text-[var(--white)] mt-1 mb-2">Diseñamos</h3><p class="text-sm text-[var(--sec)] font-light">Arquitectamos la solución ideal considerando escalabilidad, seguridad y eficiencia.</p></div>
+                <div class="methodology-step reveal"><div class="dot-outer"><div class="dot-inner"></div></div><span class="num">04</span><h3 class="text-xl font-bold text-[var(--white)] mt-1 mb-2">Desarrollamos</h3><p class="text-sm text-[var(--sec)] font-light">Construimos la solución con estándares modernos de ingeniería de software.</p></div>
+                <div class="methodology-step reveal"><div class="dot-outer"><div class="dot-inner"></div></div><span class="num">05</span><h3 class="text-xl font-bold text-[var(--white)] mt-1 mb-2">Integramos</h3><p class="text-sm text-[var(--sec)] font-light">Conectamos la nueva solución con tus sistemas existentes.</p></div>
+                <div class="methodology-step reveal"><div class="dot-outer"><div class="dot-inner"></div></div><span class="num">06</span><h3 class="text-xl font-bold text-[var(--white)] mt-1 mb-2">Implementamos</h3><p class="text-sm text-[var(--sec)] font-light">Desplegamos en producción con protocolos de zero-downtime.</p></div>
+                <div class="methodology-step reveal"><div class="dot-outer"><div class="dot-inner"></div></div><span class="num">07</span><h3 class="text-xl font-bold text-[var(--white)] mt-1 mb-2">Optimizamos</h3><p class="text-sm text-[var(--sec)] font-light">Ajustamos y mejoramos continuamente el rendimiento de la solución.</p></div>
+                <div class="methodology-step reveal"><div class="dot-outer"><div class="dot-inner"></div></div><span class="num">08</span><h3 class="text-xl font-bold text-[var(--white)] mt-1 mb-2">Evolucionamos</h3><p class="text-sm text-[var(--sec)] font-light">Acompañamos el crecimiento de tu empresa con mejoras continuas.</p></div>
+            </div>
+            <!-- Imagen lateral -->
+            <div class="hidden lg:block reveal">
+                <div class="rounded-3xl overflow-hidden border border-[var(--border)] sticky top-28">
+                    <img src="{% static 'img/building.jpg' %}" alt="Metodología HARTECK" class="w-full object-cover" style="aspect-ratio:3/4" loading="lazy">
+                    <div class="absolute inset-0" style="background:linear-gradient(180deg,transparent 60%,rgba(11,15,25,0.8) 100%)"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="tech-strip"></div>
+
+<!-- Bloque 7: Tecnología Marquee — con imagen de fondo -->
+<section class="py-28 lg:py-36 relative overflow-hidden">
+    <div class="absolute inset-0 opacity-[0.03]">
+        <img src="{% static 'img/cloud.jpg' %}" alt="" class="w-full h-full object-cover" loading="lazy">
+    </div>
+    <div class="container relative z-10">
+        <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+            <div class="section-tag justify-center">Tecnología</div>
+            <h2 class="text-3xl lg:text-5xl font-extrabold text-[var(--white)] leading-[1.08] mb-6">
+                Tecnología que <span class="gradient-text">impulsa resultados</span>
+            </h2>
+        </div>
+        <div class="marquee-wrap reveal">
+            <div class="marquee-track">
+                <div class="flex items-center gap-12 px-6">
+                    <div class="flex items-center gap-3 px-5 py-3 rounded-2xl bg-[var(--card)] border border-[var(--border)]"><i data-lucide="brain" class="w-5 h-5 text-[var(--blue)]"></i><span class="text-sm font-semibold text-[var(--white)]">OpenAI</span></div>
+                    <div class="flex items-center gap-3 px-5 py-3 rounded-2xl bg-[var(--card)] border border-[var(--border)]"><i data-lucide="code-2" class="w-5 h-5 text-[var(--cyan)]"></i><span class="text-sm font-semibold text-[var(--white)]">Django</span></div>
+                    <div class="flex items-center gap-3 px-5 py-3 rounded-2xl bg-[var(--card)] border border-[var(--border)]"><i data-lucide="box" class="w-5 h-5 text-[var(--blue)]"></i><span class="text-sm font-semibold text-[var(--white)]">Docker</span></div>
+                    <div class="flex items-center gap-3 px-5 py-3 rounded-2xl bg-[var(--card)] border border-[var(--border)]"><i data-lucide="cloud" class="w-5 h-5 text-[var(--cyan)]"></i><span class="text-sm font-semibold text-[var(--white)]">AWS</span></div>
+                    <div class="flex items-center gap-3 px-5 py-3 rounded-2xl bg-[var(--card)] border border-[var(--border)]"><i data-lucide="zap" class="w-5 h-5 text-[var(--blue)]"></i><span class="text-sm font-semibold text-[var(--white)]">React</span></div>
+                    <div class="flex items-center gap-3 px-5 py-3 rounded-2xl bg-[var(--card)] border border-[var(--border)]"><i data-lucide="git-branch" class="w-5 h-5 text-[var(--cyan)]"></i><span class="text-sm font-semibold text-[var(--white)]">Kubernetes</span></div>
+                    <div class="flex items-center gap-3 px-5 py-3 rounded-2xl bg-[var(--card)] border border-[var(--border)]"><i data-lucide="terminal" class="w-5 h-5 text-[var(--blue)]"></i><span class="text-sm font-semibold text-[var(--white)]">Python</span></div>
+                    <div class="flex items-center gap-3 px-5 py-3 rounded-2xl bg-[var(--card)] border border-[var(--border)]"><i data-lucide="database" class="w-5 h-5 text-[var(--cyan)]"></i><span class="text-sm font-semibold text-[var(--white)]">PostgreSQL</span></div>
+                </div>
+                <div class="flex items-center gap-12 px-6">
+                    <div class="flex items-center gap-3 px-5 py-3 rounded-2xl bg-[var(--card)] border border-[var(--border)]"><i data-lucide="brain" class="w-5 h-5 text-[var(--blue)]"></i><span class="text-sm font-semibold text-[var(--white)]">OpenAI</span></div>
+                    <div class="flex items-center gap-3 px-5 py-3 rounded-2xl bg-[var(--card)] border border-[var(--border)]"><i data-lucide="code-2" class="w-5 h-5 text-[var(--cyan)]"></i><span class="text-sm font-semibold text-[var(--white)]">Django</span></div>
+                    <div class="flex items-center gap-3 px-5 py-3 rounded-2xl bg-[var(--card)] border border-[var(--border)]"><i data-lucide="box" class="w-5 h-5 text-[var(--blue)]"></i><span class="text-sm font-semibold text-[var(--white)]">Docker</span></div>
+                    <div class="flex items-center gap-3 px-5 py-3 rounded-2xl bg-[var(--card)] border border-[var(--border)]"><i data-lucide="cloud" class="w-5 h-5 text-[var(--cyan)]"></i><span class="text-sm font-semibold text-[var(--white)]">AWS</span></div>
+                    <div class="flex items-center gap-3 px-5 py-3 rounded-2xl bg-[var(--card)] border border-[var(--border)]"><i data-lucide="zap" class="w-5 h-5 text-[var(--blue)]"></i><span class="text-sm font-semibold text-[var(--white)]">React</span></div>
+                    <div class="flex items-center gap-3 px-5 py-3 rounded-2xl bg-[var(--card)] border border-[var(--border)]"><i data-lucide="git-branch" class="w-5 h-5 text-[var(--cyan)]"></i><span class="text-sm font-semibold text-[var(--white)]">Kubernetes</span></div>
+                    <div class="flex items-center gap-3 px-5 py-3 rounded-2xl bg-[var(--card)] border border-[var(--border)]"><i data-lucide="terminal" class="w-5 h-5 text-[var(--blue)]"></i><span class="text-sm font-semibold text-[var(--white)]">Python</span></div>
+                    <div class="flex items-center gap-3 px-5 py-3 rounded-2xl bg-[var(--card)] border border-[var(--border)]"><i data-lucide="database" class="w-5 h-5 text-[var(--cyan)]"></i><span class="text-sm font-semibold text-[var(--white)]">PostgreSQL</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="tech-strip"></div>
+
+<!-- Bloque 8: ¿Por qué HARTECK? — con imagen -->
+<section id="nosotros" class="py-28 lg:py-36">
+    <div class="container">
+        <div class="grid lg:grid-cols-2 gap-16 items-center">
+            <div class="rl">
+                <div class="section-tag">Por qué HARTECK</div>
+                <h2 class="text-3xl lg:text-5xl font-extrabold text-[var(--white)] leading-[1.08] mb-8">
+                    No entregamos proyectos.<br>
+                    <span class="gradient-text">Construimos relaciones.</span>
+                </h2>
+                <p class="text-[var(--sec)] text-lg leading-relaxed mb-10">Acompañamos el crecimiento de tu empresa con soluciones diseñadas para perdurar.</p>
+                <div class="space-y-6">
+                    <div class="flex items-start gap-4 group cursor-default"><div class="w-8 h-8 rounded-xl bg-[var(--success)]/10 flex items-center justify-center shrink-0 mt-0.5 group-hover:bg-[var(--success)]/20 transition-all"><i data-lucide="check" class="w-4 h-4 text-[var(--success)]"></i></div><div><h4 class="text-[var(--white)] font-semibold">Soluciones personalizadas</h4><p class="text-sm text-[var(--sec)] font-light">Cada proyecto recibe una arquitectura diseñada a la medida.</p></div></div>
+                    <div class="flex items-start gap-4 group cursor-default"><div class="w-8 h-8 rounded-xl bg-[var(--success)]/10 flex items-center justify-center shrink-0 mt-0.5 group-hover:bg-[var(--success)]/20 transition-all"><i data-lucide="check" class="w-4 h-4 text-[var(--success)]"></i></div><div><h4 class="text-[var(--white)] font-semibold">Arquitecturas escalables</h4><p class="text-sm text-[var(--sec)] font-light">Diseñamos pensando en el futuro, no solo en el presente.</p></div></div>
+                    <div class="flex items-start gap-4 group cursor-default"><div class="w-8 h-8 rounded-xl bg-[var(--success)]/10 flex items-center justify-center shrink-0 mt-0.5 group-hover:bg-[var(--success)]/20 transition-all"><i data-lucide="check" class="w-4 h-4 text-[var(--success)]"></i></div><div><h4 class="text-[var(--white)] font-semibold">IA con valor real</h4><p class="text-sm text-[var(--sec)] font-light">Integramos inteligencia artificial donde genera impacto medible.</p></div></div>
+                    <div class="flex items-start gap-4 group cursor-default"><div class="w-8 h-8 rounded-xl bg-[var(--success)]/10 flex items-center justify-center shrink-0 mt-0.5 group-hover:bg-[var(--success)]/20 transition-all"><i data-lucide="check" class="w-4 h-4 text-[var(--success)]"></i></div><div><h4 class="text-[var(--white)] font-semibold">Acompañamiento continuo</h4><p class="text-sm text-[var(--sec)] font-light">Estamos contigo en cada etapa del ciclo de vida del proyecto.</p></div></div>
+                    <div class="flex items-start gap-4 group cursor-default"><div class="w-8 h-8 rounded-xl bg-[var(--success)]/10 flex items-center justify-center shrink-0 mt-0.5 group-hover:bg-[var(--success)]/20 transition-all"><i data-lucide="check" class="w-4 h-4 text-[var(--success)]"></i></div><div><h4 class="text-[var(--white)] font-semibold">Visión estratégica</h4><p class="text-sm text-[var(--sec)] font-light">No solo pensamos en tecnología, pensamos en tu modelo de negocio.</p></div></div>
+                </div>
+            </div>
+            <div class="rr">
+                <div class="rounded-3xl overflow-hidden border border-[var(--border)] relative" style="aspect-ratio:3/4">
+                    <img src="{% static 'img/robotics.jpg' %}" alt="Tecnología HARTECK" class="w-full h-full object-cover" loading="lazy">
+                    <div class="absolute inset-0" style="background:linear-gradient(180deg,rgba(11,15,25,0.3) 0%,rgba(11,15,25,0.9) 70%)"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-8">
+                        <svg class="w-8 h-8 text-[var(--blue)] mb-4 opacity-60" viewBox="0 0 24 24" fill="currentColor"><path d="M4.583 17.321C3.553 16.227 3 15 3 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179zm10 0C13.553 16.227 13 15 13 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179z"/></svg>
+                        <p class="text-[var(--ti)] text-lg leading-relaxed mb-6 font-light italic">
+                            "La tecnología debe resolver problemas reales, no añadir complejidad. Diseñamos soluciones que transforman procesos y convierten la innovación en ventaja competitiva."
+                        </p>
+                        <div class="flex items-center gap-3 pt-4 border-t border-white/10">
+                            <div class="w-12 h-12 rounded-xl gradient-bg flex items-center justify-center"><span class="text-white font-extrabold text-xl">H</span></div>
+                            <div><p class="text-[var(--white)] font-bold">HARTECK</p><p class="text-xs text-[var(--sec)]">Ingeniería que impulsa empresas</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="tech-strip"></div>
+
+<!-- Bloque 9: CTA — con imagen de fondo -->
+<section id="contacto" class="py-28 lg:py-36 relative overflow-hidden">
+    <div class="absolute inset-0 opacity-[0.06]">
+        <img src="{% static 'img/servers.jpg' %}" alt="" class="w-full h-full object-cover" loading="lazy">
+    </div>
+    <div class="absolute inset-0" style="background:radial-gradient(ellipse at 50% 50%,rgba(11,15,25,0.95),rgba(11,15,25,0.98))"></div>
+    <div class="container relative z-10">
+        <div class="text-center max-w-4xl mx-auto mb-16 reveal">
+            <div class="section-tag justify-center">Contacto</div>
+            <h2 class="text-3xl lg:text-5xl font-extrabold text-[var(--white)] leading-[1.08] mb-6">
+                Convirtamos tus desafíos<br><span class="gradient-text">en oportunidades</span>
+            </h2>
+            <p class="text-lg text-[var(--sec)] max-w-2xl mx-auto">La transformación digital comienza con una conversación. Agenda una consultoría estratégica sin compromiso.</p>
+        </div>
+        <div class="max-w-3xl mx-auto">
+            <div class="card-3d !p-8 md:!p-12 reveal">
+                <form class="space-y-6">
+                    <div class="grid sm:grid-cols-2 gap-5"><div><label>Nombre Completo</label><input type="text" placeholder="Tu nombre"></div><div><label>Correo Electrónico</label><input type="email" placeholder="correo@empresa.com"></div></div>
+                    <div class="grid sm:grid-cols-2 gap-5"><div><label>Empresa</label><input type="text" placeholder="Nombre de tu organización"></div><div><label>Cargo</label><select><option>Selecciona tu cargo</option><option>C-Level</option><option>Director</option><option>Gerente</option><option>Líder de Proyecto</option></select></div></div>
+                    <div><label>Desafío Tecnológico Principal</label><textarea rows="4" placeholder="Cuéntanos sobre tu proyecto o desafío tecnológico..."></textarea></div>
+                    <div class="grid sm:grid-cols-2 gap-5"><div><label>Presupuesto Estimado</label><select><option>Selecciona un rango</option><option>$5K - $25K</option><option>$25K - $100K</option><option>$100K - $500K</option><option>$500K+</option></select></div><div><label>Teléfono (opcional)</label><input type="tel" placeholder="+52 55 1234 5678"></div></div>
+                    <button type="submit" class="btn-p w-full justify-center text-base !py-4">Solicitar Consultoría Estratégica <i data-lucide="arrow-right" class="w-5 h-5"></i></button>
+                    <p class="text-xs text-[var(--sec)] text-center">Respuesta en máximo 48 horas hábiles. Sin compromiso.</p>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="border-t border-[var(--border)] pt-20 pb-12 relative overflow-hidden">
+    <div class="absolute inset-0 opacity-[0.03]">
+        <img src="{% static 'img/team-tech.jpg' %}" alt="" class="w-full h-full object-cover" loading="lazy">
+    </div>
+    <div class="container relative z-10">
+        <div class="text-center mb-16 reveal">
+            <div class="w-16 h-16 rounded-2xl gradient-bg flex items-center justify-center mx-auto mb-6 shadow-xl shadow-blue-500/20"><span class="text-white font-extrabold text-3xl">H</span></div>
+            <h3 class="text-3xl font-extrabold text-[var(--white)] mb-3">HARTECK</h3>
+            <p class="text-[var(--sec)] text-lg font-light max-w-md mx-auto">Ingeniería que impulsa empresas. Tecnología que transforma negocios.</p>
+        </div>
+        <div class="grid md:grid-cols-3 gap-10 mb-12 text-center md:text-left">
+            <div><h4 class="text-[var(--white)] text-sm font-semibold mb-6">Soluciones</h4><ul class="space-y-3 text-sm text-[var(--sec)] font-light"><li><a href="#soluciones" class="hover:text-[var(--white)] transition-colors">Inteligencia Artificial</a></li><li><a href="#soluciones" class="hover:text-[var(--white)] transition-colors">Ingeniería de Software</a></li><li><a href="#soluciones" class="hover:text-[var(--white)] transition-colors">Automatización</a></li><li><a href="#soluciones" class="hover:text-[var(--white)] transition-colors">Infraestructura</a></li></ul></div>
+            <div><h4 class="text-[var(--white)] text-sm font-semibold mb-6">Compañía</h4><ul class="space-y-3 text-sm text-[var(--sec)] font-light"><li><a href="#nosotros" class="hover:text-[var(--white)] transition-colors">Sobre Nosotros</a></li><li><a href="#metodologia" class="hover:text-[var(--white)] transition-colors">Metodología</a></li><li><a href="#industrias" class="hover:text-[var(--white)] transition-colors">Industrias</a></li><li><a href="#contacto" class="hover:text-[var(--white)] transition-colors">Contacto</a></li></ul></div>
+            <div><h4 class="text-[var(--white)] text-sm font-semibold mb-6">Contacto</h4><ul class="space-y-3 text-sm text-[var(--sec)] font-light"><li class="flex items-center justify-center md:justify-start gap-2"><i data-lucide="mail" class="w-4 h-4 text-[var(--blue)]"></i> mrarthur1777@gmail.com</li><li class="flex items-center justify-center md:justify-start gap-2"><i data-lucide="map-pin" class="w-4 h-4 text-[var(--blue)]"></i> Latinoamérica</li></ul><div class="flex justify-center md:justify-start gap-3 mt-6"><a href="#" class="w-10 h-10 rounded-xl bg-[var(--card)] border border-[var(--border)] flex items-center justify-center text-[var(--sec)] hover:text-[var(--blue)] hover:border-[var(--blue)] transition-all"><i data-lucide="linkedin" class="w-5 h-5"></i></a><a href="#" class="w-10 h-10 rounded-xl bg-[var(--card)] border border-[var(--border)] flex items-center justify-center text-[var(--sec)] hover:text-[var(--blue)] hover:border-[var(--blue)] transition-all"><i data-lucide="twitter" class="w-5 h-5"></i></a><a href="#" class="w-10 h-10 rounded-xl bg-[var(--card)] border border-[var(--border)] flex items-center justify-center text-[var(--sec)] hover:text-[var(--blue)] hover:border-[var(--blue)] transition-all"><i data-lucide="github" class="w-5 h-5"></i></a></div></div>
+        </div>
+        <div class="border-t border-[var(--border)] pt-8 flex flex-col md:flex-row items-center justify-between gap-4"><p class="text-xs text-[var(--sec)]">© 2026 HARTECK. Todos los derechos reservados.</p><div class="flex gap-6 text-xs text-[var(--sec)]"><a href="#" class="hover:text-[var(--white)] transition-colors">Términos</a><a href="#" class="hover:text-[var(--white)] transition-colors">Privacidad</a></div></div>
+    </div>
+</footer>
+
+<script src="https://unpkg.com/lucide@latest"></script>
+<script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>
