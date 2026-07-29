@@ -26,7 +26,11 @@ config = AutoConfig(BASE_DIR)
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("DEBUG") == "True"
+DEBUG = config(
+    "DEBUG",
+    default=False,
+    cast=bool
+)
 
 ALLOWED_HOSTS = config(
     "ALLOWED_HOSTS",
@@ -57,9 +61,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-STATICFILES_STORAGE = (
-    "whitenoise.storage.CompressedManifestStaticFilesStorage"
-)
+
 
 ROOT_URLCONF = 'harteck.urls'
 
